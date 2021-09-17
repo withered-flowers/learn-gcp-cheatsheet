@@ -2,6 +2,7 @@
 
 ## Table of Content
 - [IAM & Authentication](#iam-&-authentication)
+- [Cloud Dataproc](#cloud-dataproc)
 - [Cloud SQL](#cloud-sql)
 - [BigQuery](#bigquery)
 - [List of Repositories](#list-of-repositories)
@@ -10,6 +11,22 @@
 ```shell
 # Enable OAuth for Default Application
 gcloud auth application-default login
+```
+
+### Cloud Dataproc
+```shell
+# Create Bucket First (needed)
+export PROJECT_ID=$(gcloud info --format='value(config.project)')
+export BUCKET=$PROJECT_ID-${RANDOM}
+
+gsutil mb gs://${BUCKET}
+# Define cluster
+export MYCLUSTER="${PROJECT_ID}-cluster"
+
+gcloud config set dataproc/region <REGION>
+
+# Create Dataproc with initialization action
+gcloud dataproc clusters create ${MYCLUSTER} --bucket=${BUCKET} --worker-machine-type=n1-standard-2 --master-machine-type=n1-standard-2 --initialization-actions=gs://spls/gsp010/install-libgtk.sh --image-version=2.0  
 ```
 
 ### Cloud SQL

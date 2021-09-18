@@ -69,6 +69,20 @@ mysqlimport --local --host=$MYSQLIP --user=root --password \
 # Fast create BigQuery dataset
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
 bq mk --project_id $PROJECT_ID <DATASET_NAME>
+
+# Examine a table
+bq show <PROJECT_ID>:<DATASET_NAME>.<TABLE_NAME>
+
+# Run a Query (Legacy SQL)
+bq query --use_legacy_sql=false \
+'<INSERT_QUERY_HERE>'
+
+# Create Table from TXT
+bq load <DATASET_NAME>.<TABLE_NAME> <SOURCE_TXT> \
+<COLUMN1>:<TYPE1>,<COLUMN2>:<TYPE2>,...,<COLUMNN>:<TYPEN>
+
+# Delete Dataset
+bq rm -r <DATASET_NAME>
 ```
 
 ### List of Repositories

@@ -5,6 +5,7 @@
 - [Cloud Dataproc](#cloud-dataproc)
 - [Cloud SQL](#cloud-sql)
 - [BigQuery](#bigquery)
+- [Kubernetes] (#kubernetes)
 - [List of Repositories](#list-of-repositories)
 
 ### IAM & Authentication
@@ -83,6 +84,32 @@ bq load <DATASET_NAME>.<TABLE_NAME> <SOURCE_TXT> \
 
 # Delete Dataset
 bq rm -r <DATASET_NAME>
+```
+
+### Kubernetes
+```shell
+# Fast create clusters
+# insert zone here (e.g. us-central1-a)
+export MY_ZONE=<ZONE_NAME>
+gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2
+
+# See the cluster GKE version
+kubectl version
+
+# Deploying a container
+kubectl create deploy <DEPLOYMENT_NAME> --image=<IMAGE_NAME>:<VERSION>
+
+# Viewing Kubernetes Resources (e.g. pods, deployment)
+kubectl get <RESOURCE_NAME>
+
+# Exposing deployment to the internet
+# LoadBalancer is the type for exposing deployment to the internet
+# Will be expose as a service
+kubectl expose deployment <DEPLOYMENT_NAME> --port <PORT_NUMBER> --type LoadBalancer
+
+# Scaling the deployment
+kubectl scale deployment <DEPLOYMENT_NAME> --replicas <REPLICAS_NUMBER>
+
 ```
 
 ### List of Repositories

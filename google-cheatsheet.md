@@ -5,6 +5,7 @@
 - [Cloud Dataproc](#cloud-dataproc)
 - [Cloud SQL](#cloud-sql)
 - [BigQuery](#bigquery)
+- [AppEngine] (#appengine)
 - [Kubernetes] (#kubernetes)
 - [List of Repositories](#list-of-repositories)
 
@@ -63,6 +64,26 @@ mysql --host=$MYSQLIP --user=root  --password
 # Import csv to database
 mysqlimport --local --host=$MYSQLIP --user=root --password \
 --ignore-lines=1 --fields-terminated-by=',' <DATABASE_NAME> <CSV_NAME>.csv-*
+```
+
+### AppEngine
+```shell
+# Create the AppEngine (IRREVERSIBLE PER PROJECT !)
+gcloud app create --project=<PROJECT_NAME>
+
+# Prepare the apps ...
+# Prepare environment for the code ... (python virutalenv install requirement)
+# This code not provided here
+
+# Need to prepare the .yaml file (app.yaml file)
+# with the runtime
+# e.g. `runtime: python39` or `runtime: nodejs14`
+
+# Deployeing the apps
+gcloud app deploy
+
+# Open the link of the deployed apps
+gcloud app browse
 ```
 
 ### BigQuery

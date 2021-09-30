@@ -2,6 +2,8 @@
 
 ## Table of Content
 - [IAM & Authentication](#iam-&-authentication)
+- [VPC Network & Firewalls](#vpc-network-&-firewalls)
+- [Compute Engine](#compute-engine)
 - [Cloud Dataproc](#cloud-dataproc)
 - [Cloud SQL](#cloud-sql)
 - [BigQuery](#bigquery)
@@ -13,6 +15,34 @@
 ```shell
 # Enable OAuth for Default Application
 gcloud auth application-default login
+```
+
+### VPC Network & Firewalls
+```shell
+# Create a new network
+gcloud compute networks create <NETWORK_NAME> --subnet-mode=<custom OR auto>
+
+# Create a new subnet
+gcloud compute networks subnets create <SUBNET_NAME> --network=<NETWORK_NAME> --region=<GCP_REGION> --range=<IPADDR/SUBNET>
+
+# List of created networks
+gcloud compute networks list
+
+# List of subnet sorted by network name
+gcloud compute networks subnets list --sort-by=NETWORK
+
+# Create a new Firewall rules
+# This example is whitelisting the icmp, tcp port 22, and tcp port 3389
+gcloud compute firewall-rules create <FIREWALL_NAME> --direction=<INGRESS / EGRESS> --priority=<NUMBER> --network=<NETWORK_NAME> --action=<ALLOW / DENY> --rules=icmp,tcp:22,tcp:3389 --source-ranges=<IPADDR/SUBNET>
+
+# List of firewall rules
+gcloud compute firewall-rules list --sort-by=NETWORK
+```
+
+### Compute Engine
+```shell
+# Create VM Instance (a.k.a Compute Engine)
+gcloud compute instances create <VM_NAME> --zone=<ZONE_NAME> --machine-type=<MACHINE_TYPE> --subnet=<SUBNET_NAME> --image-family=debian-10 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=<NAME_OF_BOOT_DISK_FOR_VM>
 ```
 
 ### Cloud Dataproc
